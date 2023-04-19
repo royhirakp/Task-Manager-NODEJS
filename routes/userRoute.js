@@ -7,7 +7,6 @@ const userModel = require('../models/userModel');
 route.get('/login', async(req,res)=>{
     try {
         let user = await userModel.aggregate([{$match:{}}])
-        console.log(user)
         res.json(user)
     } catch (error) {
         res.json(error)
@@ -44,7 +43,6 @@ route.post('/login', async (req,res)=>{
         const {email , password} = req.body;        
         let user = await userModel.aggregate([{$match:{email:email}}])
         if(!user.length){
-            console.log('iffffemail newiiif')
             return res.status(400).json({status:"user doesnot exist. regster please"})
         }
         bcrypt.compare(password, user[0].password, (err,result)=>{
@@ -53,7 +51,6 @@ route.post('/login', async (req,res)=>{
             }
             if(result){
                 const token = jwt.sign({data:user[0]._id},process.env.jwtSerectKey,{expiresIn:"5h"} )
-                console.log(token)
                 res.json({
                     email,
                     status: "login Sucessfull",

@@ -10,9 +10,7 @@ const tokenVarification = (req,res,next)=>{
                     status:'filed/ login againn'
                   })
             }
-            // console.log(decode.data,"==== decode data")
             req.userID = decode.data
-            // console.log(req.userID, "FROM AUTH")
             next()
         })
     }else{

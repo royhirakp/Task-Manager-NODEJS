@@ -13,7 +13,7 @@ app.use('/task',Auth)
 app.use(userR)
 app.use(TaskR)
 app.get('/',(req,res)=>{
-    console.log('router working')
+    // console.log('router working')
     res.send({w: 'working'})
 })
 

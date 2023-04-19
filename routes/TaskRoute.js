@@ -4,7 +4,6 @@ const TaskModel = require('../models/TaskModel');
 
 router.get('/task', async (req,res)=>{
   try {
-    console.log( req.userID)
     const data = await TaskModel.aggregate([{$match:{}}])
     res.status(200).json({data})    
   } catch (error) {
@@ -37,7 +36,6 @@ router.post('/task', async (req,res)=>{
 
     try {
         let data = await TaskModel.deleteOne({_id: req.params.id})
-        // console.log(data.deletedCount ===0)
         if(data.deletedCount ===0){
             return res.status(404).json({status:"no data"})
         }
@@ -66,7 +64,6 @@ router.post('/task', async (req,res)=>{
                 description: description,
             }
         })
-        console.log(data)
 
         if(data.matchedCount ===0){
             return res.status(404).json({
